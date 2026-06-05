@@ -114,7 +114,7 @@ bash train.sh
 If you find our work helpful for your research, please consider citing our paper:
 
 **Plain Text:**
-> Xiaogang Du, Jiawei Zhang, Tongfei Liu, Tao Lei*, Yingbo Wang. SPEGC: Continual Test-Time Adaptation via Semantic-Prompt-Enhanced Graph Clustering for Medical Image Segmentation[C]. IEEE Conference on Computer Vision and Pattern Recognition, Denver, USA, June 3rd-7th, 2026. Accept.
+> Xiaogang Du, Jiawei Zhang, Tongfei Liu, Tao Lei*, Yingbo Wang. SPEGC: Continual Test-Time Adaptation via Semantic-Prompt-Enhanced Graph Clustering for Medical Image Segmentation[C]. IEEE Conference on Computer Vision and Pattern Recognition, Denver, USA, June 3rd-7th, 2026, pp. 8481-8491
 
 **BibTeX:**
 ```bibtex
