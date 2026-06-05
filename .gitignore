@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Project-specific Data & Checkpoints
+weights/
+datasets/
+output/
+checkpoint/
+*.pth
+*.pkl
+
+# Local Output & Debug Logs
+*.log
+log.txt
+result.txt
+
+# Environments & Virtual Envs
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

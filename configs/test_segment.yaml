@@ -1,0 +1,54 @@
+_BASE_: "./Base-RCNN-FPN.yaml"
+OUTPUT_DIR: "output/test"  
+DATASETS:
+#A
+  # TEST: ("REFUGE_train", "REFUGE_test", "ORIGA_train", "ORIGA_test", "REFUGE_Valid", "Drishti_GS_train", "Drishti_GS_test") ###
+#B
+  TEST: ("RIM_ONE_r3_train", "RIM_ONE_r3_test", "ORIGA_train", "ORIGA_test", "REFUGE_Valid", "Drishti_GS_train", "Drishti_GS_test")
+#C
+  # TEST: ("RIM_ONE_r3_train", "RIM_ONE_r3_test", "REFUGE_train", "REFUGE_test", "REFUGE_Valid", "Drishti_GS_train", "Drishti_GS_test")
+#D
+  # TEST: ("RIM_ONE_r3_train", "RIM_ONE_r3_test", "REFUGE_train", "REFUGE_test", "ORIGA_train", "ORIGA_test", "Drishti_GS_train", "Drishti_GS_test")
+#E
+  # TEST: ("RIM_ONE_r3_train", "RIM_ONE_r3_test", "REFUGE_train", "REFUGE_test", "ORIGA_train", "ORIGA_test", "REFUGE_Valid")
+# "RIM_ONE_r3_train", "RIM_ONE_r3_test", "REFUGE_train", "REFUGE_test", "ORIGA_train", "ORIGA_test", "REFUGE_Valid", "Drishti_GS_train", "Drishti_GS_test"
+#  BKAI_test  CVC_ClinicDB_test  ETIS_LaribPolypDB_test  Kvasir_SEG_test
+  # TEST: ("CVC_ClinicDB_test", "ETIS_LaribPolypDB_test", "Kvasir_SEG_test")
+  # TEST: ("BKAI_test", "ETIS_LaribPolypDB_test", "Kvasir_SEG_test")
+  # TEST: ("BKAI_test", "CVC_ClinicDB_test", "Kvasir_SEG_test")
+  # TEST: ("BKAI_test", "CVC_ClinicDB_test", "ETIS_LaribPolypDB_test")
+MODEL:
+  # Weight file is now controlled by test.sh script via MODEL.WEIGHTS parameter
+  META_ARCHITECTURE: "DAobjTwoStagePseudoLabGeneralizedRCNN"
+  MASK_ON: True
+  RESNETS:
+    DEPTH: 50
+    OUT_FEATURES: ["res2", "res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res2", "res3", "res4", "res5"]
+  PROPOSAL_GENERATOR:
+    NAME: "PseudoLabRPN"
+  ROI_HEADS:
+    NAME: "StandardROIHeadsPseudoLab"
+    NUM_CLASSES: 2 
+    IN_FEATURES: ["p2", "p3", "p4", "p5"]
+  ROI_BOX_HEAD:
+    NAME: "FastRCNNConvFCHead"
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+SOLVER:
+  MAX_ITER: 30000
+  BASE_LR: 0.005
+SEMISUPNET:
+  Trainer: baseline
+  BBOX_THRESHOLD: 0.8
+  DIS_TYPE: "p2"
+TEST:
+  # CTTA, BATCH
+  # CTTA stream processing forces single image input, no need to configure BATCH
+  CTTA_POOL_SIZE: 3
+  CTTA_MIN_POOL_SIZE: 1
+  CTTA_ENABLE_SINGLE_GRAPH: True
+  TTT: True
+INPUT:
+  FORMAT: "RGB"
